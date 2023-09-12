@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>calculator</title>
+        <style>
+        #calc {
+            border-collapse: collapse;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            top:40px;
+        }
+
+        #calc td {
+            padding: 10px;
+            height: 40px;
+            width: 40px;
+            
+        }
+        input[type="button"] {
+        background-color: #555;
+        color: #fff;
+        font-size: 20px;
+        border: none;
+        border-radius: 30px;
+        padding: 10px 30px;
+        cursor: pointer;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    input[type="button"]:active {
+        transform: translate(2.5px, 2.5px);
+        box-shadow: none;
+    }
+    #col2
+    {
+        padding: 10px 72px;
+    }
+    input[type="button"].opr
+    {
+        background-color: #777676d4;
+    }
+    input[type="button"].equals
+    {
+        background-color: #ff6600;
+    }
+        input
+        {
+            height: 40px;
+            width: 45px;
+
+        }
+
+        #result {
+            width: 100%;
+            background-color: #222;
+            padding-top: 45px;
+            font-size: 25px;
+            border: 1px solid white;
+        }
+        tr
+        {
+            background-color:  #333;
+            
+        }
+        body 
+        { 
+            /*background-color:#777676d4;*/
+            background-image: url("https://images.pexels.com/photos/62693/pexels-photo-62693.jpeg?auto=compress&cs=tinysrgb&w=600");
+        }
+        </style>
+    </head>
+    <body>
+        
+        <table id = "calc">
+            <tr> 
+                <td colspan="4">
+                    <input type="text" id ="result">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" ><input type="button" class="opr" id="col2" name="cancel" value="C" onclick="clearResult()"></td>
+                <td><input type="button" class="opr" name="clear" value="X" onclick="clearinput()"></td>
+                <td> <input type="button" class="opr" value="/" onclick="appendToResult('/')"></td>
+            </tr>
+            <tr>
+                <td> <input type="button" value="7" onclick="appendToResult('7')"> </td>
+                <td> <input type="button" value="8" onclick="appendToResult('8')"></td>
+                <td> <input type="button" value="9" onclick="appendToResult('9')"></td>
+                <td> <input type="button" class="opr" value="+" onclick="appendToResult('+')"></td>
+            </tr>
+            <tr>
+                <td> <input type="button" value="4" onclick="appendToResult('4')"></td>
+                <td> <input type="button" value="5" onclick="appendToResult('5')"></td>
+                <td> <input type="button" value="6" onclick="appendToResult('6')"></td>
+                <td> <input type="button" class="opr" value="-" onclick="appendToResult('-')"></td>
+            </tr>
+            <tr>
+                <td> <input type="button" value="1" onclick="appendToResult('1')"></td>
+                <td> <input type="button" value="2" onclick="appendToResult('2')"></td>
+                <td> <input type="button" value="3" onclick="appendToResult('3')"></td>
+                <td> <input type="button" class="opr" value="*" onclick="appendToResult('*')"></td>
+            </tr>
+            <tr> 
+                <td> <input type="button" value="0" onclick="appendToResult('0')"></td>
+                <td> <input type="button" value="." onclick="appendToResult('.')"></td>
+                <td colspan="2" ><input type="button" class="equals" id="col2" value="=" onclick="calresult()"></td>
+            </tr>
+        </table>
+        <script>
+            let currentInput = "";
+            function appendToResult (value)
+            {
+                currentInput = currentInput+value;
+                document.getElementById("result").value = currentInput;
+            }
+            function clearResult()
+            {
+                currentInput = "";
+                document.getElementById("result").value = "";
+            }
+            function clearinput() {
+                currentInput = currentInput.slice(0, -1);
+                document.getElementById("result").value = currentInput;
+            }
+
+            function calresult()
+            {
+                try {
+                    if (currentInput !== "") {
+                    let result = eval(currentInput);
+                    document.getElementById("result").value = result;
+                    currentInput = result.toString();
+                    }
+                     else {
+                    document.getElementById("result").value = "";
+                    }
+                    } catch (error) {
+                    document.getElementById("result").value = "Error";
+                }
+            }
+        </script>
+    </body>
+</html>
